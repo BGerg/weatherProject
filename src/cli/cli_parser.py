@@ -16,7 +16,7 @@ def parse():
                             '--saveto',
                             action='store',
                             type=str,
-                            default='weatherdata',
+                            default='weatherdata.json',
                             metavar='',
                             help='set the json output file name (default filename: weatherdata)')
 
