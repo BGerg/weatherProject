@@ -1,32 +1,8 @@
 import requests
 import json
-import argparse
 import os.path
 
 
-parser = argparse.ArgumentParser(description = 'Get weather data from wttr.com'
-                                               ' and save to a json file',
-                                 epilog = 'Enjoy the the weather and the program :)')
-
-parser.add_argument('-city',
-                    '--city',
-                    action='store',
-                    type=str,
-                    default='Miskolc',
-                    metavar='',
-                    help='sets the city for which you want weather data (default Miskolc)')
-parser.add_argument('-saveto',
-                    '--saveto',
-                    action='store',
-                    type=str,
-                    default='weatherdata',
-                    metavar='',
-                    help='set the json output file name (default filename: weatherdata)')
-
-args = parser.parse_args()
-
-city_name = args.city
-json_file = args.saveto+".json"
 
 def check_file_exist():
     if not os.path.isfile(json_file):
