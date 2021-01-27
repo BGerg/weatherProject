@@ -20,5 +20,4 @@ def parse():
                             metavar='',
                             help='set the json output file name (default filename: weatherdata)')
 
-
         return parser.parse_args()

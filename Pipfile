@@ -11,4 +11,4 @@ certifi = "*"
 argparse = "*"
 
 [requires]
-python_version = "3.9"
+
