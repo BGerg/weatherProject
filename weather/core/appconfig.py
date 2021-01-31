@@ -13,5 +13,3 @@ class AppConfig:
 
         else:
             AppConfig.__instance
-
-
