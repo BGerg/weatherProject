@@ -11,4 +11,3 @@ certifi = "*"
 argparse = "*"
 
 [requires]
-
