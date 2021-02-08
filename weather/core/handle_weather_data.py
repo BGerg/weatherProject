@@ -1,6 +1,5 @@
 import requests
 import json
-import sys
 
 
 def write_webpage_content_in_json_format(url_address: str) -> dict:
@@ -21,7 +20,7 @@ def get_url_content(url_address: str):
         print("Connection error occurred.")
     except requests.HTTPError:
         print("HTTP error occurred")
-    except requests.RequestExceptio:
+    except requests.RequestException:
         print("There was an ambiguous exception that occurred while handling request.")
 
 
