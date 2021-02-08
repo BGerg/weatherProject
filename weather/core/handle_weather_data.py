@@ -11,7 +11,10 @@ def write_webpage_content_in_json_format(url_address: str) -> dict:
 def get_url_content(url_address: str):
     try:
         response = requests.get(url_address, params=(('format', 'j1'),))
-        return response
+        if not response.text:
+            return response
+        else:
+            print("Response contains no data")
     except requests.exceptions.Timeout:
         print("URL request timeout")
     except requests.URLRequired:
