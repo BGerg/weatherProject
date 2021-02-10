@@ -9,22 +9,25 @@ def write_webpage_content_in_json_format(url_address: str) -> dict:
 
 
 def get_url_content(url_address: str):
+    request_timeout = 5
     try:
-        response = requests.get(url_address, params=(('format', 'j1'),))
+        response = requests.get(url_address, params=(('format', 'j1'),), timeout=request_timeout)
+        response.raise_for_status()
+
         if not response.text:
             return response
         else:
             print("Response contains no data")
     except requests.exceptions.Timeout:
-        print("URL request timeout")
+        raise TimeoutError(f"URL request timeout more than {request_timeout} sec")
     except requests.URLRequired:
-        print("Invalid URL given")
+        raise Exception(f"{url_address} is invalid URL")
     except requests.ConnectionError:
-        print("Connection error occurred.")
-    except requests.HTTPError:
-        print("HTTP error occurred")
-    except requests.RequestException:
-        print("There was an ambiguous exception that occurred while handling request.")
+        raise Exception("Refused connection or DNS failure etc. occures")
+    except requests.HTTPError as http_err:
+        raise Exception(f"HTTP error occurred {http_err}")
+    except requests.RequestException as e:
+        raise Exception(f"{e} There was an ambiguous exception that occurred while handling request.")
 
 
 def deserialize_url_content(url_content: object):
