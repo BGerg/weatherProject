@@ -13,13 +13,14 @@ def write_webpage_content_in_json_format(url_address: str) -> dict:
 
 def get_url_content(get: Callable, url_address: str):
     request_timeout = 5
+
     try:
         response = get(url_address,
-                       params=(('format', 'j1')),
+                       params=('format', 'j1'),
                        timeout=request_timeout)
         response.raise_for_status()
 
-        if response.text:       #check response text is empty or not
+        if response.text:  # check response text is empty or not
             return response.text
         else:
             raise Exception("Response contains no data")
@@ -28,13 +29,12 @@ def get_url_content(get: Callable, url_address: str):
     except URLRequired:
         raise URLRequired(f"{url_address} is an invalid URL")
     except ConnectionError:
-        raise ConnectionError("Refused connection or DNS failure etc. occured")
+        raise ConnectionError("Refused connection or DNS failure etc. occurred")
     except HTTPError as http_err:
         raise HTTPError(f"HTTP error: {http_err}  occurred")
     except RequestException as e:
         raise RequestException(f"There was an ambiguous exception that "
                                f"occurred while handling request. Error: {e} ")
-
 
 
 def deserialize_url_content(url_content: object):
@@ -45,21 +45,3 @@ def deserialize_url_content(url_content: object):
 def write_content_to_json(file: str, content: dict):
     with open(file, 'a') as output_file:
         json.dump(content, output_file, indent=4)
-
-
-class IRequest:
-    def get():
-        pass
-
-
-class ConcreteRequest(IRequest):
-    def __init__(url_address):
-        self._url = url_address
-
-    def get():
-        return request.url(self._url_address)
-
-
-def get_(request: IRequest):
-    response = request.get()
-    print(response)
