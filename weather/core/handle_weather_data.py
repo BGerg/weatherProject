@@ -1,40 +1,65 @@
+from typing import Callable
 import requests
 import json
 
+from requests import URLRequired, RequestException, Timeout, HTTPError
+
 
 def write_webpage_content_in_json_format(url_address: str) -> dict:
-    url_content = get_url_content(url_address)
+    url_content = get_url_content(requests.get, url_address)
     final_data = deserialize_url_content(url_content)
     return final_data
 
 
-def get_url_content(url_address: str):
+def get_url_content(get: Callable, url_address: str):
     request_timeout = 5
     try:
-        response = requests.get(url_address, params=(('format', 'j1'),), timeout=request_timeout)
+        response = get(url_address,
+                       params=(('format', 'j1')),
+                       timeout=request_timeout)
         response.raise_for_status()
 
-        if not response.text:
-            return response
+        if response.text:       #check response text is empty or not
+            return response.text
         else:
-            print("Response contains no data")
-    except requests.exceptions.Timeout:
-        raise TimeoutError(f"URL request timeout more than {request_timeout} sec")
-    except requests.URLRequired:
-        raise Exception(f"{url_address} is invalid URL")
-    except requests.ConnectionError:
-        raise Exception("Refused connection or DNS failure etc. occures")
-    except requests.HTTPError as http_err:
-        raise Exception(f"HTTP error occurred {http_err}")
-    except requests.RequestException as e:
-        raise Exception(f"{e} There was an ambiguous exception that occurred while handling request.")
+            raise Exception("Response contains no data")
+    except Timeout:
+        raise Timeout(f"URL request timeout more than {request_timeout} sec")
+    except URLRequired:
+        raise URLRequired(f"{url_address} is an invalid URL")
+    except ConnectionError:
+        raise ConnectionError("Refused connection or DNS failure etc. occured")
+    except HTTPError as http_err:
+        raise HTTPError(f"HTTP error: {http_err}  occurred")
+    except RequestException as e:
+        raise RequestException(f"There was an ambiguous exception that "
+                               f"occurred while handling request. Error: {e} ")
+
 
 
 def deserialize_url_content(url_content: object):
-    deserialized_data = json.loads(url_content.text)['current_condition'][0]
+    deserialized_data = json.loads(url_content)['current_condition'][0]
     return deserialized_data
 
 
 def write_content_to_json(file: str, content: dict):
     with open(file, 'a') as output_file:
         json.dump(content, output_file, indent=4)
+
+
+class IRequest:
+    def get():
+        pass
+
+
+class ConcreteRequest(IRequest):
+    def __init__(url_address):
+        self._url = url_address
+
+    def get():
+        return request.url(self._url_address)
+
+
+def get_(request: IRequest):
+    response = request.get()
+    print(response)

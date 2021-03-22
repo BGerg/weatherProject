@@ -5,7 +5,7 @@ import weather.core.handle_weather_data as handler
 
 
 def handle(args):
-    url_address = "http://wttewewr.in/"+args.city
+    url_address = "http://wttr.in/"+args.city
     app_config = AppConfig(city_name=args.city, json_file=args.saveto, url_address=url_address)
     weather_datas = handler.write_webpage_content_in_json_format(app_config.url_address)
     json_dataclass = JsonData(**weather_datas)
