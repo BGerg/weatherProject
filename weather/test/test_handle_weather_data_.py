@@ -1,11 +1,7 @@
 from unittest.mock import Mock
-from unittest.mock import patch
 from requests.exceptions import URLRequired, Timeout, RequestException, HTTPError
-import requests
-
 from weather.core.handle_weather_data import get_url_content
 import unittest
-
 
 
 class MyTestCase(unittest.TestCase):
@@ -24,7 +20,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual({"weatherCelsious": 1},
                          get_url_content(mock_dict,
                                          "doNothing"))
-
 
     def test_get_url_content_with_empty_response(self):
         class MockObject:
@@ -45,7 +40,6 @@ class MyTestCase(unittest.TestCase):
             get_url_content(mock_dict,
                             "doNothing")
 
-
     def test_get_url_content_with_timeout(self):
         requests = Mock()
         requests.get.side_effect = Timeout
@@ -61,7 +55,7 @@ class MyTestCase(unittest.TestCase):
     def test_get_url_content_with_ConnectionError(self):
         requests = Mock()
         requests.get.side_effect = ConnectionError
-        with self.assertRaisesRegex(ConnectionError, 'Refused connection or DNS failure etc. occured'):
+        with self.assertRaisesRegex(ConnectionError, 'Refused connection or DNS failure etc. occurred'):
             get_url_content(requests.get, "doNothing")
 
     def test_get_url_content_with_HTTPError(self):
