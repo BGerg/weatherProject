@@ -7,15 +7,16 @@ from requests import URLRequired, RequestException, Timeout, HTTPError
 
 def write_webpage_content_in_json_format(url_address: str) -> dict:
     url_content = get_url_content(requests.get, url_address)
-    final_data = deserialize_url_content(url_content)
-    return final_data
+    return deserialize_url_content(url_content)
 
 
 def get_url_content(get: Callable, url_address: str):
     request_timeout = 5
 
     try:
-        response = get(url_address,params=(('format', 'j1')),timeout=request_timeout)
+        response = get(url_address,
+                       params=(('format', 'j1'),),
+                       timeout=request_timeout)
         response.raise_for_status()
 
         if response.text:  # check response text is empty or not
@@ -33,11 +34,12 @@ def get_url_content(get: Callable, url_address: str):
     except RequestException as e:
         raise RequestException(f"There was an ambiguous exception that "
                                f"occurred while handling request. Error: {e} ")
+    except KeyboardInterrupt:
+        raise KeyboardInterrupt("Script was interrupted by user")
 
 
-def deserialize_url_content(url_content: object):
+def deserialize_url_content(url_content: str):
     deserialized_data = json.loads(url_content)['current_condition'][0]
-    print(type(url_content))
     return deserialized_data
 
 
