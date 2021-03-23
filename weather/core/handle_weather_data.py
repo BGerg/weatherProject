@@ -15,9 +15,7 @@ def get_url_content(get: Callable, url_address: str):
     request_timeout = 5
 
     try:
-        response = get(url_address,
-                       params=('format', 'j1'),
-                       timeout=request_timeout)
+        response = get(url_address,params=(('format', 'j1')),timeout=request_timeout)
         response.raise_for_status()
 
         if response.text:  # check response text is empty or not
@@ -39,6 +37,7 @@ def get_url_content(get: Callable, url_address: str):
 
 def deserialize_url_content(url_content: object):
     deserialized_data = json.loads(url_content)['current_condition'][0]
+    print(type(url_content))
     return deserialized_data
 
 
