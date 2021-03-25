@@ -29,7 +29,7 @@ jobs:
         pip install pipenv
         #pipenv lock
         pipenv sync
-        #pipenv install -e git+https://github.com/some_user/some_package.git#egg=some_package
+        pipenv install -e git+https://github.com/some_user/some_package.git#egg=some_package
         #pip install requests 
         #pip install certifi
         #pip install argparse
