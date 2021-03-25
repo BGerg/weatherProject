@@ -1,7 +1,6 @@
 from typing import Callable
 import requests
 import json
-
 from requests import URLRequired, RequestException, Timeout, HTTPError
 
 
