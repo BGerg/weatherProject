@@ -17,12 +17,15 @@ class JsonData:
         humidity: int
         localObsDateTime: str
         observation_time: str
+        precipInches: float
         precipMM: float
         pressure: int
+        pressureInches: int
         temp_C: int
         temp_F: int
         uvIndex: int
         visibility: int
+        visibilityMiles: int
         weatherCode: int
         weatherDesc: WeatherDesc
         weatherIconUrl: WeatherIconUrl

@@ -9,6 +9,6 @@ verify_ssl = true
 requests = "*"
 certifi = "*"
 argparse = "*"
+pyfakefs = "*"
 
 [requires]
-
