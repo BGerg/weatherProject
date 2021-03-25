@@ -32,4 +32,4 @@ jobs:
         pip install pyfakefs
     - name: Test with unittest
       run: |
-      pipenv run python -m unittest discover
+        python -m unittest discover
