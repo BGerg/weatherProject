@@ -26,10 +26,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests 
-        pip install certifi
-        pip install argparse
-        pip install pyfakefs
+        pipenv install -e git+https://github.com/some_user/some_package.git#egg=some_package
+        #pip install requests 
+        #pip install certifi
+        #pip install argparse
+        #pip install pyfakefs
     - name: Test with unittest
       run: |
         python -m unittest discover
