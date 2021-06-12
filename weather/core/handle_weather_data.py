@@ -45,3 +45,4 @@ def deserialize_url_content(url_content: str):
 def write_content_to_json(file: str, content: dict):
     with open(file, 'a') as output_file:
         json.dump(content, output_file, indent=4)
+

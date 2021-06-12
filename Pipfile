@@ -10,5 +10,7 @@ requests = "*"
 argparse = "*"
 pyfakefs = "*"
 certifi = "*"
+wheel = "*"
+setuptools = "*"
 
 [requires]
