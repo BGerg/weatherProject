@@ -3,7 +3,8 @@ import argparse
 
 def parse():
     parser = argparse.ArgumentParser(description='Get weather data from wttr.com'
-                                                 ' and save to a json file',
+                                                 'print it, create statistics or'
+                                                 'evaluation',
                                      epilog='Enjoy the the weather and the program :)')
 
     parser.add_argument('-c',
@@ -12,7 +13,7 @@ def parse():
                         type=str,
                         default='Miskolc',
                         metavar='',
-                        help='sets the city for which you want weather data (default Miskolc)')
+                        help='set the city for which you want weather data (default Miskolc)')
     parser.add_argument('-s',
                         '--saveto',
                         action='store',
@@ -20,5 +21,18 @@ def parse():
                         default='weatherdata.json',
                         metavar='',
                         help='set the json output file name (default filename: weatherdata)')
+    parser.add_argument('-a',
+                        '--all',
+                        action='store_true',
+                        default='False',
+                        help='Show all possible weather data')
+    parser.add_argument('-f',
+                        '--filter',
+                        nargs='+',
+                        help='Show the chosen weather data')
+    parser.add_argument('query_mode',
+                        help='Chose from these modes: current, service, aggregate')
+    parser.add_argument('-m', '--mass', nargs='+', type=int,
+            help='signal mass(es)')
 
     return parser.parse_args()

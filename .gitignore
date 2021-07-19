@@ -1,6 +1,6 @@
 weatherdata.json
-Pipfile.lock
 .idea
+
 weather/__pycache__
 weather/cli/__pycache__
 weather/core/__pycache__
