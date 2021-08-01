@@ -23,7 +23,7 @@ def parse():
                         help='set the json output file name (default filename: weatherdata)')
     parser.add_argument('-a',
                         '--all',
-                        action='store_true',
+                        type=bool,
                         default='False',
                         help='Show all possible weather data')
     parser.add_argument('-f',
@@ -32,7 +32,6 @@ def parse():
                         help='Show the chosen weather data')
     parser.add_argument('query_mode',
                         help='Chose from these modes: current, service, aggregate')
-    parser.add_argument('-m', '--mass', nargs='+', type=int,
-            help='signal mass(es)')
+
 
     return parser.parse_args()

@@ -8,7 +8,7 @@ setup(
             'weather=weather.run:handle'
         ]
     },
-    packages=['weather', 'weather.cli', 'weather.gui', 'weather.core', 'weather.test'],
+    packages=['weather', 'weather.cli', 'weather.gui', 'weather.core'],
     url='https://github.com/BGerg/weatherProject',
     license='MIT',
     author='Cof',

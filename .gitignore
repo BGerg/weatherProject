@@ -5,3 +5,4 @@ weather/__pycache__
 weather/cli/__pycache__
 weather/core/__pycache__
 weather/test/__pycache__
+/weather.egg-info

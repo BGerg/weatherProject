@@ -12,5 +12,6 @@ pyfakefs = "*"
 certifi = "*"
 wheel = "*"
 setuptools = "*"
+pylint = "*"
 
 [requires]
